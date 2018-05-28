@@ -247,5 +247,5 @@ namespace LogExpert
 
             #endregion
         }
-    }
+	}
 }

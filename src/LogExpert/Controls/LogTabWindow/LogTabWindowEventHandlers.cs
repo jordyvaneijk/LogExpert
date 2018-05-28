@@ -710,6 +710,11 @@ namespace LogExpert
             OpenFileDialog();
         }
 
+	    private void toolStripButtonClearLogfile_Click(object sender, EventArgs e)
+	    {
+		    ClearLogFile();
+	    }
+
         private void toolStripButtonSearch_Click(object sender, EventArgs e)
         {
             OpenSearchDialog();

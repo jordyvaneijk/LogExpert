@@ -336,6 +336,38 @@ namespace LogExpert
             }
         }
 
+	    private void ClearLogFile()
+	    {
+		    if (this.CurrentLogWindow == null)
+		    {
+			    return;
+		    }
+
+		    var fileName = this.CurrentLogWindow.FileName;
+
+			try
+			{
+				var name = Path.GetFileName(fileName);
+				if (MessageBox.Show($"Are you sure you want to clear the contents of the logfile \n\n{name}?", "Clear logfile",
+					    MessageBoxButtons.YesNo) == DialogResult.Yes)
+				{
+					if (!string.IsNullOrWhiteSpace(fileName) && File.Exists(fileName))
+					{
+						using (var stream = File.Open(fileName, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite))
+						{
+							stream.SetLength(0);
+							stream.Close();
+						}
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				_logger.Warn(e, "Insufficient rights for action(): ");
+			}
+		    
+	    }
+
         private void OpenFileDialog()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
